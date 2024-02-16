@@ -9,7 +9,7 @@
             
 
                 <div class="col-2">
-                    {{-- <a href="{{ route('comics', ['param' => $comic['id']])}}"> --}}
+                    <a href="{{ route('comics.show', ['comic' => $comic->id]) }}">
                     <img src="{{ $comic['thumb'] }}" alt="Copertina" href="">
                     <p>{{ $comic['series'] }}</p>
                 </a>
