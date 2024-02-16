@@ -15,7 +15,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('comics', function (Blueprint $table) {
-            $comics = config('comics');
             $table->id();
             $table->char('title', 100);
             $table->text('description');
