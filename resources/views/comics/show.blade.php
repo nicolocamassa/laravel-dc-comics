@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="blue-banner">
-        <div class="smaller-content">
+        <div class="smaller-content d-flex justify-content-between">
             <img src="{{ $comic['thumb'] }}" alt="Comic cover">
+            <button type="submit" class="btn btn-warning btn-scss"><a href="{{ route('comics.edit', ['comic' => $comic->id])}}"><i class="fas fa-pencil"></i> Modifica</a></button>
         </div>
     </div>
     <div class="smaller-content bg-white-content">
