@@ -2,7 +2,8 @@
 
 @section('content')
     <h1 class="text-center fw-bold mt-3">AGGIUNGI UN NUOVO FUMETTO</h1>
-    <form action="{{ route('comics.store') }}">
+    <form action="{{ route('comics.store') }}" method="POST">
+        @csrf
         <div class="content my-3">
 
             <div class="mb-3">
