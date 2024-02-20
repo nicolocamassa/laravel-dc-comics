@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comic as Comic;
+use Illuminate\Support\Facades\Validator;
 
 class ComicController extends Controller
 {
@@ -86,7 +87,7 @@ class ComicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $form = $request->all();
+        $form = $this->validation($request->all());
         
         $comic = Comic::find($id);
 
@@ -98,6 +99,7 @@ class ComicController extends Controller
         $comic->sale_date = $form['sales_date'];
         $comic->type = $form['type'];
 
+        
         $comic->update();
 
         return redirect()->route('comics.show', ['comic' => $comic->id]);
@@ -117,4 +119,40 @@ class ComicController extends Controller
 
         return redirect()->route('comics.index');
     }
+
+    private function validation($data){
+        $validator = Validator::make($data, 
+        [
+            'title'         => 'required|min:5|max:40',
+            'description'   => 'required|max:1000',
+            'thumb'         => 'min:10',
+            'price'         => 'required|max:10',
+            'series'        => 'required|min:5|max:30',
+            'sales_date'     => 'required',
+            'type'          => 'required|min:5|max:20',
+        ],
+        [
+            'title.required'         => 'Inserimento del titolo obbligatiorio',
+            'title.min'              => 'I caratteri del titolo devono essere almeno 5',
+            'title.max'              => 'I caratteri del titolo devono essere meno di 40',
+            'description.required'   => 'Inserimento della descrizione obbligatiorio',
+            'description.max'        => 'I caratteri della descrizione devono essere meno di 1000',
+            'thumb.min'              => 'I caratteri dell\' immagine devono essere almeno 10',
+            'price.required'         => 'Inserimento del prezzo obbligatorio',
+            'price.max'              => 'I caratteri del prezzo devono essere meno di 10',
+            'series.required'        => 'Inserimento della serie obbligatorio',
+            'series.min'             => 'I caratteri della serie devono essere almeno 5',
+            'series.max'             => 'I caratteri della serie devono essere meno di 30',
+            'sales_date.required'     => 'Inserimento della data obbligatorio',
+            'type.required'          => 'Inserimento del tipo obbligatorio',
+            'type.min'               => 'I caratteri del tipo devono essere meno di 5',
+            'type.max'               => 'I caratteri del tipo devono essere almeno 20',
+        ]
+        )->validate();
+
+        return $validator;
+    }
+
 }
+
+
