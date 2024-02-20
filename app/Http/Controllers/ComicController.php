@@ -91,13 +91,7 @@ class ComicController extends Controller
         
         $comic = Comic::find($id);
 
-        $comic->title = $form['title'];
-        $comic->description = $form['description'];
-        $comic->thumb = $form['thumb'];
-        $comic->price = $form['price'];
-        $comic->series = $form['series'];
-        $comic->sale_date = $form['sales_date'];
-        $comic->type = $form['type'];
+        $comic->fill($form);
 
         
         $comic->update();
