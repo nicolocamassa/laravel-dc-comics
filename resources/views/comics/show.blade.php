@@ -10,7 +10,7 @@
                     <button type="submit" class="btn btn-warning me-3"><a class="text-decoration-none text-white" href="{{ route('comics.edit', ['comic' => $comic->id])}}"><i class="fas fa-pencil"></i> Modifica</a></button>
                 </div>
 
-                <form action="{{ route('comics.destroy', ['comic' => $comic->id]) }}" method="POST">
+                <form action="{{ route('comics.destroy', ['comic' => $comic->id]) }}" method="POST" onsubmit="return confirm('Sei sicuro di voler eliminare?')">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"><i class="fas fa-trash-can"></i> Elimina</button>
