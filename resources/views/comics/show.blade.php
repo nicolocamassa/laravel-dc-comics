@@ -2,9 +2,17 @@
 
 @section('content')
     <div class="blue-banner">
-        <div class="smaller-content d-flex justify-content-between">
+        
+        <div class="smaller-content d-flex justify-content-end" >
             <img src="{{ $comic['thumb'] }}" alt="Comic cover">
-            <button type="submit" class="btn btn-warning btn-scss"><a href="{{ route('comics.edit', ['comic' => $comic->id])}}"><i class="fas fa-pencil"></i> Modifica</a></button>
+            <div class="d-flex align-items-center justify-content-end">
+                <div class="content d-flex align-items-center">
+                    <button type="submit" class="btn btn-warning me-3"><a href="{{ route('comics.edit', ['comic' => $comic->id])}}"><i class="fas fa-pencil"></i> Modifica</a></button>
+                </div>
+                <form action="{{ route('comics.destroy', ['comic => $comic->id']) }}" method="POST">
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-can"></i> Elimina</button>
+                </form>
+            </div>
         </div>
     </div>
     <div class="smaller-content bg-white-content">
